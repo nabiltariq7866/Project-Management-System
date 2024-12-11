@@ -3,23 +3,25 @@ import Login from "./component/Auth/Login";
 import EmployeeDashboard from "./component/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./component/Dashboard/AdminDashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PrivateRoutes from "./component/Auth/PrivateRoutes";
-import CheckLoginStatus from "./component/Auth/CheckLoginStatus";
-
-
+import ProtectedRoutes from "./component/Auth/ProtectedRoutes";
+import Home from "./component/others/Home";
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <CheckLoginStatus Element={<Login/>} />,
+      element: <Home/>,
     },
+    // {
+    //   path: "/",
+    //   element: <Login/>,
+    // },
     {
       path:"/EmployeeDashboard",
-      element:(<PrivateRoutes Element={<EmployeeDashboard />} role={["user"]}/>)
+      element:(<ProtectedRoutes Element={<EmployeeDashboard />} role={["user"]}/>)
     },
     {
       path:"/AdminDashboard",
-      element:(<PrivateRoutes Element={<AdminDashboard />} role={["Admin"]}/>)
+      element:(<ProtectedRoutes Element={<AdminDashboard />} role={["admin"]}/>)
     },
   ]);
   return (

@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     <div className="p-7 w-full h-screen">
       <Header/>
       <CreateTask/>
-      <AllTask/>
+      {/* <AllTask/> */}
     </div>
   );
 };
