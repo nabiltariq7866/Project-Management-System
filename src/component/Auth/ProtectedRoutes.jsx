@@ -4,8 +4,8 @@ import AppContext from '../../context/AuthContext';
 
 const ProtectedRoutes = ({role,Element}) => {
     const context = useContext(AppContext);
-    const auth=context.getLocalStorage("login");
-
+    const auth=context.userData;
+ console.log(auth)
     if(!auth.login){
         console.log("login")
         return <Navigate to="/" replace />;

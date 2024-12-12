@@ -17,6 +17,7 @@ const Login = () => {
   // }
   function hanldeSubmit(e) {
     e.preventDefault();
+    
     const formData=new FormData(e.target)
     const data=Object.fromEntries(formData.entries())
     let loginData;
@@ -26,8 +27,7 @@ const Login = () => {
         role:'admin',
         login:true
       }
-      context.setUser(loginData)
-      context.setLocalStorage("login",loginData)
+      context.setUserData(loginData)
     navigate('/AdminDashboard',replace)
     }else{
       loginData={
@@ -35,12 +35,11 @@ const Login = () => {
         role:'user',
         login:true
       }
-      context.setUser(loginData)
-      context.setLocalStorage("login",loginData)
+      context.setUserData(loginData)
     navigate('/EmployeeDashboard',replace) 
     }
    
-   
+  
   }
   return (
    

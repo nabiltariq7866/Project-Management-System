@@ -5,23 +5,43 @@ import AdminDashboard from "./component/Dashboard/AdminDashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoutes from "./component/Auth/ProtectedRoutes";
 import Home from "./component/others/Home";
+import AllQuestionAdmin from "./component/others/AllQuestionAdmin";
+import CreateTask from "./component/others/CreateTask";
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home/>,
+      element: <Home />,
     },
     // {
     //   path: "/",
     //   element: <Login/>,
     // },
     {
-      path:"/EmployeeDashboard",
-      element:(<ProtectedRoutes Element={<EmployeeDashboard />} role={["user"]}/>)
+      path: "/EmployeeDashboard",
+      element: (
+        <ProtectedRoutes Element={<EmployeeDashboard />} role={["user"]} />
+      ),
     },
     {
-      path:"/AdminDashboard",
-      element:(<ProtectedRoutes Element={<AdminDashboard />} role={["admin"]}/>)
+      path: "/AdminDashboard",
+      element: (
+        <ProtectedRoutes Element={<AdminDashboard />} role={["admin"]} />
+      ),
+      children: [
+        {
+          path: "AllQuestionAdmin",
+          element: (
+            <ProtectedRoutes Element={<AllQuestionAdmin />} role={["admin"]} />
+          ),
+        },
+        {
+          path: "CreateQuestion",
+          element: (
+            <ProtectedRoutes Element={<CreateTask />} role={["admin"]} />
+          ),
+        },
+      ],
     },
   ]);
   return (
