@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createPortal } from "react-dom";
+import AppContext from "../../context/AuthContext";
 
-export default function Modal({ isOpen, setIsOpen, children }) {
+export default function Modal({ children }) {
+  const context =useContext(AppContext)
   return createPortal(
     <div
-      onClick={() => setIsOpen(false)}
+      onClick={() => {
+        console.log("close model")
+        context.setEditAddInput([''])
+        context.setaddInput([""])
+        context.setIsOpen(false)
+
+      }}
       className={`fixed inset-0 flex items-center justify-center bg-black/40 px-4 ${
-        isOpen ? "" : "hidden"
+        context.isOpen ? "" : "hidden"
       }`}
     >
       <div

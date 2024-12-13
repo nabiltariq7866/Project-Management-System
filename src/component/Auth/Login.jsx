@@ -38,7 +38,7 @@ const Login = () => {
       context.setUserData(loginData)
     navigate('/EmployeeDashboard',replace) 
     }
-   
+   context.setIsOpen(false)
   
   }
   return (

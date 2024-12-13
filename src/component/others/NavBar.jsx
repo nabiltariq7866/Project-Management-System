@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import image from "../../assets/QuizLogo.png"
 import Modal from './Modal';
 import Login from '../Auth/Login';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import AppContext from '../../context/AuthContext';
 const NavBar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const context = useContext(AppContext);
   return (
     <div>
      <div className="flex items-center justify-between ">
@@ -19,10 +20,13 @@ const NavBar = () => {
       <NavLink className={({isActive})=>clsx({'bg-[#d92732] text-white   ': isActive},"text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",{"text-[#d92732]":!isActive})  } to="/h">Html Quiz</NavLink>
 
       </div>
-      <button onClick={()=>setIsOpen(true)} className="bg-[#d92732] text-white px-5 py-2 rounded-sm text-lg font-medium">
+      <button onClick={()=>context.setIsOpen(true)} className="bg-[#d92732] text-white px-5 py-2 rounded-sm text-lg font-medium">
         Log In
       </button>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}><Login/></Modal>
+      <div>
+      <Modal><Login/></Modal>
+
+      </div>
     </div>
     </div>
   )

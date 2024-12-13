@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { IoContractOutline } from "react-icons/io5";
 
 const AppContext = createContext({
   userData: [],
@@ -11,6 +12,10 @@ const AppContext = createContext({
   adminQuestionCollection: [],
   setaddInput: () => {},
   addInput: [],
+  editAddInput: [],
+  isOpen:false,
+  setIsOpen:()=>{},
+  setEditAddInput:()=>{},
 });
 function setLocalStorage(name, item) {
   localStorage.setItem(name, JSON.stringify(item));
@@ -23,20 +28,23 @@ function getLocalStorage(name) {
 
 export const AuthContext = ({ children }) => {
   const [userData, setUserData] = useState(getLocalStorage("login"));
+  const [isOpen, setIsOpen] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [adminQuestionCollection, setAdminQuestionCollection] = useState(
     getLocalStorage("AdminQuestionCollectin")
   );
   const [addInput, setaddInput] = useState([""]);
+  const [editAddInput, setEditAddInput] = useState([""]);
+  console.log(adminQuestionCollection);
+  console.log(editAddInput);
+  console.log(addInput);
   useEffect(() => {
     setLocalStorage("AdminQuestionCollectin", adminQuestionCollection);
   }, [adminQuestionCollection]);
   useEffect(() => {
     setLocalStorage("login", userData);
   }, [userData]);
-  console.log(adminQuestionCollection);
-  console.log(correctAnswer);
-  console.log(userData);
+
   const setUser = (data) => {
     setUserData(data);
   };
@@ -51,7 +59,11 @@ export const AuthContext = ({ children }) => {
     setAdminQuestionCollection,
     adminQuestionCollection,
     addInput,
-    setaddInput
+    setaddInput,
+    isOpen,
+    setIsOpen,
+    editAddInput,
+    setEditAddInput
   };
 
   return <AppContext.Provider value={passData}>{children}</AppContext.Provider>;

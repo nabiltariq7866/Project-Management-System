@@ -18,11 +18,9 @@ const QuestionOptionTureFalse = () => {
           <label>
             <input
               className="mr-2"
-              type="radio"
+              type="checkbox"
               value="true"
               name="option"
-              onChange={handleCorrectAnswerChange}
-              readOnly
               checked
             />
             True
@@ -32,11 +30,10 @@ const QuestionOptionTureFalse = () => {
           <label>
             <input
               className="mr-2"
-              type="radio"
+              type="checkbox"
               value="false"
               name="option"
               checked
-              onChange={handleCorrectAnswerChange}
             />
             False
           </label>

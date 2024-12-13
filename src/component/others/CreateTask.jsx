@@ -18,7 +18,9 @@ const CreateTask = () => {
     let option=formData.getAll("option")
     let data=Object.fromEntries(formData.entries())
     context.setCorrectAnswer(option[context.correctAnswer]);
-    const correctAnswer=option[context.correctAnswer]
+    let correctAnswer;
+    {data.QuestionType==="boolvalue"?correctAnswer=context.correctAnswer:correctAnswer=option[context.correctAnswer]}
+    console.log(correctAnswer)
     data={
       ...data,
       id:Date.now(),
