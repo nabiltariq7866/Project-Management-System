@@ -24,9 +24,10 @@ const AllTask = ({ index, data }) => {
   }
   const handleAnswerClick = (userAns) => {
     if (context.userData.role === "user") {
-      context.setUserData((prev) => ({ ...prev, selectedAns: userAns }));
-      setSelectedAnswer(userAns);
-      setIsAnswered(true);
+      console.log(userAns)
+      // context.setAdminQuestionCollection((prev) => ({ ...prev, selectedAns: userAns }));
+      // setSelectedAnswer(userAns);
+      // setIsAnswered(true);
     }
   };
   return (
@@ -57,7 +58,9 @@ const AllTask = ({ index, data }) => {
           )}
         </div>
         <div className="flex flex-col flex-wrap justify-between items-start">
-          {data.option.map((value) => {
+          {
+          data.option.map((value) => {
+
             let backgroundColor = "";
             // if (isAnswered && context.userData.role === "user") {
             //   if (value === selectedAnswer) {
@@ -70,10 +73,11 @@ const AllTask = ({ index, data }) => {
             // }
 
             return (
-              <label >
-              <input type="radio" name="selectedAns"
-                className={`shrink-0 cursor-pointer mr-4 p-4 rounded-md mb-2 ${backgroundColor}`}
-                onClick={() => handleAnswerClick(value)} required
+              
+              <label className={`${context.userData.role==="admin"?"bg-green-800 w-full mb-2 p-4 rounded-md":"shrink-0 bg-slate-700 cursor-pointer mr-4 p-4 w-full flex gap-3 rounded-md mb-2"}`}>
+              <input type="radio" name={`selectedAns+${index}`}
+                className={` ${backgroundColor} ${context.userData.role==="admin"?"hidden":" "}`}
+                onClick={() => handleAnswerClick(value)} 
               />
                 {value}
                 </label>
