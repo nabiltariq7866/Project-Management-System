@@ -22,6 +22,14 @@ const App = () => {
       element: (
         <ProtectedRoutes Element={<EmployeeDashboard />} role={["user"]} />
       ),
+      children:[
+        {
+          path: "AllQuestionAdmin",
+          element: (
+            <ProtectedRoutes Element={<AllQuestionAdmin />} role={["admin","user"]} />
+          ),
+        },
+      ]
     },
     {
       path: "/AdminDashboard",
@@ -32,7 +40,7 @@ const App = () => {
         {
           path: "AllQuestionAdmin",
           element: (
-            <ProtectedRoutes Element={<AllQuestionAdmin />} role={["admin"]} />
+            <ProtectedRoutes Element={<AllQuestionAdmin />} role={["admin","user"]} />
           ),
         },
         {

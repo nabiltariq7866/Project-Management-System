@@ -30,14 +30,12 @@ export const AuthContext = ({ children }) => {
   const [userData, setUserData] = useState(getLocalStorage("login"));
   const [isOpen, setIsOpen] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(null);
+  console.log(userData);
   const [adminQuestionCollection, setAdminQuestionCollection] = useState(
     getLocalStorage("AdminQuestionCollectin")
   );
   const [addInput, setaddInput] = useState([""]);
   const [editAddInput, setEditAddInput] = useState([""]);
-  console.log(adminQuestionCollection);
-  console.log(editAddInput);
-  console.log(addInput);
   useEffect(() => {
     setLocalStorage("AdminQuestionCollectin", adminQuestionCollection);
   }, [adminQuestionCollection]);

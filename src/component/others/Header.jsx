@@ -9,10 +9,10 @@ const Header = () => {
   let userName = userData.email.split("@")[0];
   userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
   function handleLogout() {
-    console.log("logout");
     context.setUserData({ login: false });
     context.setLocalStorage("login", { login: false });
   }
+  console.log(context.userData);
   return (
     <div className="flex items-center justify-between ">
       <div className="flex gap-2">
@@ -24,55 +24,62 @@ const Header = () => {
         </h1>
       </div>
       <div className="flex gap-3">
-        <NavLink
-          className={({ isActive }) =>
-            clsx(
-              { "bg-[#d92732] text-white   ": isActive },
-              "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
-              { "text-[#d92732]": !isActive }
-            )
-          }
-          to="AllQuestionAdmin"
-          end
-        >
-        All Question
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            clsx(
-              { "bg-[#d92732] text-white   ": isActive },
-              "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
-              { "text-[#d92732]": !isActive }
-            )
-          }
-          to="CreateQuestion"
-        >
-          Add Question
-        </NavLink>
-        {/* <NavLink
-          className={({ isActive }) =>
-            clsx(
-              { "bg-[#d92732] text-white   ": isActive },
-              "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
-              { "text-[#d92732]": !isActive }
-            )
-          }
-          to="/e"
-        >
-          English Quiz
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            clsx(
-              { "bg-[#d92732] text-white   ": isActive },
-              "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
-              { "text-[#d92732]": !isActive }
-            )
-          }
-          to="/h"
-        >
-          Html Quiz
-        </NavLink> */}
+        {context.userData.role === "admin" ? (
+          <>
+            <NavLink
+              className={({ isActive }) =>
+                clsx(
+                  { "bg-[#d92732] text-white   ": isActive },
+                  "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
+                  { "text-[#d92732]": !isActive }
+                )
+              }
+              to="AllQuestionAdmin"
+              end
+            >
+              All Question
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                clsx(
+                  { "bg-[#d92732] text-white   ": isActive },
+                  "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
+                  { "text-[#d92732]": !isActive }
+                )
+              }
+              to="CreateQuestion"
+            >
+              Add Question
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              className={({ isActive }) =>
+                clsx(
+                  { "bg-[#d92732] text-white   ": isActive },
+                  "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
+                  { "text-[#d92732]": !isActive }
+                )
+              }
+              to="AllQuestionAdmin"
+            >
+              Take Quiz
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                clsx(
+                  { "bg-[#d92732] text-white   ": isActive },
+                  "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
+                  { "text-[#d92732]": !isActive }
+                )
+              }
+              to="/h"
+            >
+              Final Result
+            </NavLink>
+          </>
+        )}
       </div>
       <button
         onClick={handleLogout}

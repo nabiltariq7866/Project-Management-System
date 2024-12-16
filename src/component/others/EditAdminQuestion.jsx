@@ -5,21 +5,16 @@ import AppContext from '../../context/AuthContext'
 
 const EditAdminQuestion = () => {
    const context =  useContext(AppContext)
-  console.log(context.editAddInput)
-   console.log(context.editAddInput.option)
+  // console.log(context.editAddInput)
+  //  console.log(context.editAddInput.option)
    let data=context.editAddInput;
-//    useEffect(() => {
-//     if (data) {
+   useEffect(() => {
+    if (data && data.option) {
       
-//       context.setCorrectAnswer(data.option.indexOf(data.correctAnswer));
+      context.setCorrectAnswer(data.option.indexOf(data.correctAnswer));
 
-//     }
-//   }, [data]);
-// //    console.log(data.correctAnswer);
-// //   const index = data.option.indexOf(data.correctAnswer) 
-// //   console.log(index)
-//  
-
+    }
+  }, [data,context]);
     function handleSubmitQuestinAdmin(e){
         e.preventDefault();
         console.log("update click")
@@ -30,6 +25,7 @@ const EditAdminQuestion = () => {
         console.log(editData);
         context.setCorrectAnswer(option[context.correctAnswer]);
         let correctAnswer;
+        
         {data.QuestionType==="boolvalue"?correctAnswer=context.correctAnswer:correctAnswer=option[context.correctAnswer]}
         console.log(correctAnswer)
         editData={
