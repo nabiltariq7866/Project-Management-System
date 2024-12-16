@@ -70,12 +70,13 @@ const AllTask = ({ index, data }) => {
             // }
 
             return (
-              <h3
-                className={`shrink-0 cursor-pointer w-[550px] p-4 rounded-md mb-2 ${backgroundColor}`}
-                onClick={() => handleAnswerClick(value)}
-              >
+              <label >
+              <input type="radio" name="selectedAns"
+                className={`shrink-0 cursor-pointer mr-4 p-4 rounded-md mb-2 ${backgroundColor}`}
+                onClick={() => handleAnswerClick(value)} required
+              />
                 {value}
-              </h3>
+                </label>
             );
           })}
         </div>

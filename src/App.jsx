@@ -7,6 +7,7 @@ import ProtectedRoutes from "./component/Auth/ProtectedRoutes";
 import Home from "./component/others/Home";
 import AllQuestionAdmin from "./component/others/AllQuestionAdmin";
 import CreateTask from "./component/others/CreateTask";
+import FinalResult from "./component/others/FinalResult";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const App = () => {
             <ProtectedRoutes Element={<AllQuestionAdmin />} role={["admin","user"]} />
           ),
         },
+        {
+          path:"FinalResult",
+          element:<FinalResult/>
+        }
       ]
     },
     {

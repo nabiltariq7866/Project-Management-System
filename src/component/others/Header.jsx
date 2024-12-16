@@ -74,7 +74,7 @@ const Header = () => {
                   { "text-[#d92732]": !isActive }
                 )
               }
-              to="/h"
+              to="FinalResult"
             >
               Final Result
             </NavLink>
