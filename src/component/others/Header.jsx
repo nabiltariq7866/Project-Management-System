@@ -51,6 +51,18 @@ const Header = () => {
             >
               Add Question
             </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                clsx(
+                  { "bg-[#d92732] text-white   ": isActive },
+                  "text-2xl font-semibold rounded hover:text-white  hover:bg-[#d92732] p-2",
+                  { "text-[#d92732]": !isActive }
+                )
+              }
+              to="AllQuizDetails"
+            >
+              All Result
+            </NavLink>
           </>
         ) : (
           <>

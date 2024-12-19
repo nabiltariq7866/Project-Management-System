@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { createPortal } from "react-dom";
 import AppContext from "../../context/AuthContext";
 
-export default function Modal({ children }) {
+export default function Modal({ children
+  ,setSelectedQuiz,setselectedQuizdetail
+ }) {
   const context =useContext(AppContext)
   return createPortal(
     <div
@@ -10,6 +12,9 @@ export default function Modal({ children }) {
         console.log("close model")
         context.setEditAddInput([''])
         context.setaddInput([""])
+        {setSelectedQuiz&&setSelectedQuiz(null)}
+        {setselectedQuizdetail&&setselectedQuizdetail(null)}
+
         context.setIsOpen(false)
 
       }}

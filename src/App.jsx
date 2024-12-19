@@ -8,6 +8,7 @@ import Home from "./component/others/Home";
 import AllQuestionAdmin from "./component/others/AllQuestionAdmin";
 import CreateTask from "./component/others/CreateTask";
 import FinalResult from "./component/others/FinalResult";
+import AllQuizDetails from "./component/others/AllQuizDetails";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -52,6 +53,12 @@ const App = () => {
           path: "CreateQuestion",
           element: (
             <ProtectedRoutes Element={<CreateTask />} role={["admin"]} />
+          ),
+        },
+        {
+          path: "AllQuizDetails",
+          element: (
+            <ProtectedRoutes Element={<AllQuizDetails />} role={["admin"]} />
           ),
         },
       ],

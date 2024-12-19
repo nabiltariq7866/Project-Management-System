@@ -13,9 +13,15 @@ const AppContext = createContext({
   setaddInput: () => {},
   addInput: [],
   editAddInput: [],
-  isOpen:false,
-  setIsOpen:()=>{},
-  setEditAddInput:()=>{},
+  isOpen: false,
+  setIsOpen: () => {},
+  setEditAddInput: () => {},
+  setUserHistoryData: () => {},
+  userHistoryData: [],
+  setUserHistoryIndex:()=>{},
+  userHistoryIndex:"",
+  setQuizData:()=>{},
+  quizData:[]
 });
 function setLocalStorage(name, item) {
   localStorage.setItem(name, JSON.stringify(item));
@@ -28,9 +34,15 @@ function getLocalStorage(name) {
 
 export const AuthContext = ({ children }) => {
   const [userData, setUserData] = useState(getLocalStorage("login"));
+  const [userHistoryData, setUserHistoryData] = useState(
+    getLocalStorage("userHistory")
+  );
+  const [userHistoryIndex, setUserHistoryIndex] = useState("");
+  const [quizData, setQuizData] =useState(getLocalStorage("quizData"));
+  console.log(userHistoryIndex)
   const [isOpen, setIsOpen] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState(null);
-  console.log(userData);
+  console.log(userHistoryData);
   const [adminQuestionCollection, setAdminQuestionCollection] = useState(
     getLocalStorage("AdminQuestionCollectin")
   );
@@ -41,7 +53,21 @@ export const AuthContext = ({ children }) => {
   }, [adminQuestionCollection]);
   useEffect(() => {
     setLocalStorage("login", userData);
+    console.log(userHistoryData)
+    const userHistoryIndex = userHistoryData.findIndex(
+      (entry) => entry.email === userData.email
+    );
+    console.log(userHistoryIndex);
+   setUserHistoryIndex(userHistoryIndex)
   }, [userData]);
+  useEffect(() => {
+    setLocalStorage("userHistory", userHistoryData);
+
+  }, [userHistoryData]);
+  useEffect(() => {
+    setLocalStorage("quizData", quizData);
+
+  }, [quizData]);
 
   const setUser = (data) => {
     setUserData(data);
@@ -61,7 +87,13 @@ export const AuthContext = ({ children }) => {
     isOpen,
     setIsOpen,
     editAddInput,
-    setEditAddInput
+    setEditAddInput,
+    setUserHistoryData,
+    userHistoryData,
+    userHistoryIndex,
+    setUserHistoryIndex,
+    quizData,
+    setQuizData
   };
 
   return <AppContext.Provider value={passData}>{children}</AppContext.Provider>;

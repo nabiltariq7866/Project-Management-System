@@ -35,6 +35,17 @@ const Login = () => {
         role:'user',
         login:true
       }
+      const emailExists = context.userHistoryData.some(
+        (item) => item.email === data.email
+      );
+      if (!emailExists) {
+        context.setUserHistoryData((prev) => [
+          ...prev,
+          { email: data.email, questions: [] },
+        ]);
+      }
+     
+
       context.setUserData(loginData)
     navigate('/EmployeeDashboard',replace) 
     }
