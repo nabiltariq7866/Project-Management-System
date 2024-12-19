@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState
+  ,useEffect
+ } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoEye } from "react-icons/io5";
@@ -8,30 +10,42 @@ import Modal from "./Modal";
 import EditAdminQuestion from "./EditAdminQuestion";
 import ChartBar from "./ChartBar";
 const AllTask = ({ index, data, finalResult }) => {
-  console.log(data);
-  console.log(finalResult);
+  // console.log(data);
+  // console.log(finalResult);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [chartData, setChartData] = useState({});
+  console.log(chartData)
   const [activeModal, setActiveModal] = useState(null);
   const [userScore, setUserScore] = useState(null);
-  console.log(userScore);
+  // console.log(userScore);
   const context = useContext(AppContext);
+  useEffect(() => {
+    // This will log and show the updated chartData every time it changes.
+    console.log("Chart data updated: ", chartData);
+  }, [chartData]);
   function handleEditfun(data) {
     context.setEditAddInput(data);
     context.setaddInput(data.option);
     setActiveModal("edit");
     context.setIsOpen(true);
   }
+  
   function handleDelete(id) {
     const newADminQuestion = context.adminQuestionCollection.filter(
       (data) => data.id !== id
     );
     context.setAdminQuestionCollection(newADminQuestion);
   }
-  function handleChartItem() {
+  function handleChartItem(data) {
     console.log("Eye Click");
-    setActiveModal("chart");
-    context.setIsOpen(true);
+    console.log(data);
+    console.log("b")
+    setChartData(data);
+    
+    console.log("c")
+    // setActiveModal("chart");
+    // context.setIsOpen(true);
   }
   const handleAnswerClick = (userAns) => {
     if (context.userData.role === "user" && !finalResult) {
@@ -95,11 +109,12 @@ const AllTask = ({ index, data, finalResult }) => {
               />
               <IoEye
                 className="text-[2.9rem] text-green-500 hover:text-red-700 cursor-pointer"
-                onClick={handleChartItem}
+                onClick={() => handleChartItem(data)}
               />
               {activeModal === "chart" && (
-                <Modal>
-                  <ChartBar />
+                <Modal setChartData={setChartData}
+                >
+                  <ChartBar data={chartData} />
                 </Modal>
               )}
             </div>

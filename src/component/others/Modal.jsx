@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import AppContext from "../../context/AuthContext";
 
 export default function Modal({ children
-  ,setSelectedQuiz,setselectedQuizdetail
+  ,setSelectedQuiz,setselectedQuizdetail,setChartData
  }) {
   const context =useContext(AppContext)
   return createPortal(
@@ -14,6 +14,7 @@ export default function Modal({ children
         context.setaddInput([""])
         {setSelectedQuiz&&setSelectedQuiz(null)}
         {setselectedQuizdetail&&setselectedQuizdetail(null)}
+        {setChartData&&setChartData({})}
 
         context.setIsOpen(false)
 
